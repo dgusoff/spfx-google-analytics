@@ -10,4 +10,5 @@ export interface IAnalyticsApplicationCustomizerProperties {
 /** A Custom Action which can be run during execution of a Client Side Application */
 export default class AnalyticsApplicationCustomizer extends BaseApplicationCustomizer<IAnalyticsApplicationCustomizerProperties> {
     onInit(): Promise<void>;
+    AttachNavigatedEvent(): void;
 }

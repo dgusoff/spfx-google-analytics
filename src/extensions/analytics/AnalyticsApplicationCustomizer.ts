@@ -24,7 +24,7 @@ export default class AnalyticsApplicationCustomizer
 
   @override
   public onInit(): Promise<void> {
-    
+    this.AttachNavigatedEvent();
     let trackingID: string = this.properties.trackingID;
     if (!trackingID) {
       Log.info(LOG_SOURCE, `${strings.MissingID}`);
@@ -44,5 +44,18 @@ export default class AnalyticsApplicationCustomizer
     }
 
     return Promise.resolve();
+  }
+
+  public AttachNavigatedEvent(){
+    let trackingID: string = this.properties.trackingID;
+    this.context.application.navigatedEvent.add(this, () => {
+      eval(`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config',  '${trackingID}');
+    `);
+    console.log("accessing from navigated event");
+    });
   }
 }
