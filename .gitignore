@@ -71,3 +71,9 @@ typings/
 
 # Serverless directories
 .serverless
+
+#spfx directories
+.vs/
+temp/
+sharepoint/
+lib/
